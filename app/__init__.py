@@ -5,11 +5,13 @@ Flask Application Factory
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_wtf.csrf import CSRFProtect
 from config.config import config
 
 # 初始化扩展
 db = SQLAlchemy()
 login_manager = LoginManager()
+csrf = CSRFProtect()
 
 def create_app(config_name='default'):
     """
@@ -29,6 +31,7 @@ def create_app(config_name='default'):
     # 初始化扩展
     db.init_app(app)
     login_manager.init_app(app)
+    csrf.init_app(app)
     
     # 配置登录管理器
     login_manager.login_view = 'auth.login'

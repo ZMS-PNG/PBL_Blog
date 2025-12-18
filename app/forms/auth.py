@@ -92,3 +92,45 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('记住我')
     
     submit = SubmitField('登录')
+
+
+class EditProfileForm(FlaskForm):
+    """
+    编辑个人资料表单
+    
+    实现需求:
+    - 7.2: 用户修改个人信息时验证并更新用户资料
+    """
+    nickname = StringField('昵称', validators=[
+        Length(max=50, message='昵称长度不能超过50个字符')
+    ])
+    
+    bio = StringField('个人简介', validators=[
+        Length(max=500, message='个人简介长度不能超过500个字符')
+    ])
+    
+    submit = SubmitField('保存修改')
+
+
+class ChangePasswordForm(FlaskForm):
+    """
+    修改密码表单
+    
+    实现需求:
+    - 7.3: 用户修改密码时验证原密码并加密存储新密码
+    """
+    old_password = PasswordField('原密码', validators=[
+        DataRequired(message='请输入原密码')
+    ])
+    
+    new_password = PasswordField('新密码', validators=[
+        DataRequired(message='请输入新密码'),
+        Length(min=6, max=128, message='密码长度必须在6-128个字符之间')
+    ])
+    
+    confirm_password = PasswordField('确认新密码', validators=[
+        DataRequired(message='请确认新密码'),
+        EqualTo('new_password', message='两次输入的密码不一致')
+    ])
+    
+    submit = SubmitField('修改密码')

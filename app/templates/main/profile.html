@@ -13,10 +13,17 @@
                 <p><strong>用户名:</strong> {{ current_user.username }}</p>
                 <p><strong>昵称:</strong> {{ current_user.get_display_name() }}</p>
                 <p><strong>邮箱:</strong> {{ current_user.email }}</p>
+                {% if current_user.bio %}
+                <p><strong>个人简介:</strong> {{ current_user.bio }}</p>
+                {% endif %}
                 <p><strong>注册时间:</strong> {{ current_user.created_at.strftime('%Y-%m-%d') }}</p>
                 {% if current_user.is_admin() %}
                     <span class="badge bg-danger">管理员</span>
                 {% endif %}
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('main.edit_profile') }}" class="btn btn-sm btn-outline-primary">编辑资料</a>
+                <a href="{{ url_for('main.change_password') }}" class="btn btn-sm btn-outline-secondary">修改密码</a>
             </div>
         </div>
     </div>
@@ -28,15 +35,21 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="text-center">
-                            <h3 class="text-primary">{{ current_user.get_article_count() }}</h3>
-                            <p>发布文章</p>
+                            <h3 class="text-primary">{{ published_article_count }}</h3>
+                            <p>已发布文章</p>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="text-center">
-                            <h3 class="text-success">{{ current_user.get_comment_count() }}</h3>
+                            <h3 class="text-warning">{{ draft_article_count }}</h3>
+                            <p>草稿文章</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <h3 class="text-success">{{ comment_count }}</h3>
                             <p>发表评论</p>
                         </div>
                     </div>
@@ -49,9 +62,9 @@
                 <h5>快速操作</h5>
             </div>
             <div class="card-body">
-                <a href="#" class="btn btn-primary me-2">发布文章</a>
-                <a href="#" class="btn btn-outline-primary me-2">我的文章</a>
-                <a href="#" class="btn btn-outline-secondary">编辑资料</a>
+                <a href="{{ url_for('article.create') }}" class="btn btn-primary me-2">发布文章</a>
+                <a href="{{ url_for('article.my_articles') }}" class="btn btn-outline-primary me-2">我的文章</a>
+                <a href="{{ url_for('comment.my_comments') }}" class="btn btn-outline-secondary">我的评论</a>
             </div>
         </div>
     </div>

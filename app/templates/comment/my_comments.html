@@ -50,7 +50,7 @@
                                         {% if comment.can_delete(current_user) %}
                                             <form method="POST" action="{{ url_for('comment.delete_comment', comment_id=comment.id) }}" 
                                                   class="d-inline" onsubmit="return confirm('确定要删除这条评论吗？');">
-                                                {{ csrf_token() }}
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                                                 <button type="submit" class="btn btn-sm btn-outline-danger">删除</button>
                                             </form>
                                         {% endif %}
