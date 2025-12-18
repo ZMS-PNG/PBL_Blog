@@ -112,3 +112,21 @@ def change_password():
     
     return render_template('main/change_password.html', form=form)
 
+
+@main_bp.route('/robots.txt')
+def robots():
+    """
+    提供 robots.txt 文件
+    """
+    from flask import send_from_directory
+    import os
+    return send_from_directory(os.path.join(main_bp.root_path, '..', 'static'), 'robots.txt')
+
+@main_bp.route('/favicon.ico')
+def favicon():
+    """
+    提供 favicon.ico 文件
+    """
+    from flask import send_from_directory
+    import os
+    return send_from_directory(os.path.join(main_bp.root_path, '..', 'static'), 'favicon.ico')

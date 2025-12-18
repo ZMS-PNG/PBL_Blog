@@ -133,14 +133,35 @@ python run.py
 
 应用将在 http://127.0.0.1:5000 启动。
 
-### 9. 默认管理员账号
+### 9. 生成演示数据（可选）
 
-首次运行后，可以通过注册创建账号，然后手动在数据库中将用户设置为管理员：
-
-```sql
--- 将用户ID为1的用户设置为管理员
-INSERT INTO admins (user_id, role) VALUES (1, 'admin');
+```bash
+python seed_demo_data.py
 ```
+
+这将创建：
+- 1个管理员账号（admin/admin123）
+- 4个普通用户
+- 5个文章分类
+- 5篇示例文章
+- 10条示例评论
+
+### 10. 安全检查
+
+在部署到生产环境前，运行安全检查脚本：
+
+```bash
+python security_check.py
+```
+
+该脚本会检查：
+- SECRET_KEY 配置
+- 数据库密码强度
+- DEBUG 模式状态
+- Session 安全配置
+- 文件权限
+
+⚠️ **生产环境部署前必读**: 请查看 `PRODUCTION_SETUP.md` 了解详细的安全配置指南。
 
 ## 项目结构
 

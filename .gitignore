@@ -20,6 +20,8 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
 
 # Virtual Environment
 venv/
@@ -27,15 +29,20 @@ env/
 ENV/
 .venv/
 .env
+.env.local
+.env.production
 
 # Flask
 instance/
 .webassets-cache
+.flask_session/
 
 # Database
 *.db
 *.sqlite
 *.sqlite3
+*.sql
+*.dump
 
 # IDE
 .vscode/
@@ -43,14 +50,55 @@ instance/
 *.swp
 *.swo
 *~
+.project
+.pydevproject
+.settings/
 
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
 # Logs
 *.log
+logs/
+*.log.*
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
 
 # Config files with sensitive data
 config/local.py
 .env.local
+.env.production
+
+# Uploads
+app/static/uploads/
+uploads/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~.nib
+*.pid
+
+# Compiled files
+*.pyc
+*.pyo
+
+# Documentation builds
+docs/_build/
+site/
+
+# Backup files
+*.backup
+*.old
+
+# Cache
+.cache/
+*.cache

@@ -52,10 +52,17 @@ class Config:
 class DevelopmentConfig(Config):
     """开发环境配置"""
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = (
-        f"mysql+pymysql://{Config.MYSQL_USER}:{Config.MYSQL_PASSWORD}@"
-        f"{Config.MYSQL_HOST}:{Config.MYSQL_PORT}/blog_system_dev"
-    )
+    # 使用 SQLite 进行快速开发（如果 MySQL 不可用）
+    USE_SQLITE = os.environ.get('USE_SQLITE', 'false').lower() == 'true'
+    
+    if USE_SQLITE:
+        SQLALCHEMY_DATABASE_URI = 'sqlite:///blog_system.db'
+    else:
+        # 使用环境变量中的数据库名称
+        SQLALCHEMY_DATABASE_URI = (
+            f"mysql+pymysql://{Config.MYSQL_USER}:{Config.MYSQL_PASSWORD}@"
+            f"{Config.MYSQL_HOST}:{Config.MYSQL_PORT}/{Config.MYSQL_DATABASE}"
+        )
 
 class TestingConfig(Config):
     """测试环境配置"""

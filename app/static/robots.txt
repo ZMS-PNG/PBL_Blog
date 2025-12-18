@@ -1,0 +1,17 @@
+# robots.txt for Blog System
+
+# Allow all robots to access the site
+User-agent: *
+Allow: /
+
+# Disallow admin pages
+Disallow: /admin/
+Disallow: /auth/
+
+# Disallow user-specific pages
+Disallow: /profile
+Disallow: /my-articles
+Disallow: /my-comments
+
+# Sitemap location (update when sitemap is created)
+# Sitemap: https://yourdomain.com/sitemap.xml
